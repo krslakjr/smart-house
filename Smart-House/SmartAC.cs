@@ -11,23 +11,35 @@ namespace SmartHouseApp
             Temperature = initialTemperature;
         }
 
-        public void SetTemperature(int temp)
+        public override void SetSetting(string settingName, int value)
         {
-            if (temp < 16 || temp > 30)
+            if (settingName.ToLower() == "temperature" && value >= 16 && value <= 30)
             {
-                Console.WriteLine("Invalid temperature! Set between 16 and 30°C.");
+                Temperature = value;
+                Console.WriteLine($"{Name} temperature set to {Temperature}°C.");
             }
             else
             {
-                Temperature = temp;
-                Console.WriteLine($"{Name} is set on {Temperature}°C.");
+                Console.WriteLine("Invalid temperature value. It should be between 16°C and 30°C.");
             }
+        }
+        public void SetTemperature(int temperature)
+        {
+            Temperature = temperature;
+            Console.WriteLine($"{Name} temperature is now {temperature}°C.");
+        }
+
+        public override void Toggle()
+        {
+            IsOn = !IsOn;
+            Console.WriteLine($"{Name} is {(IsOn ? "turned on" : "turned off")}.");
         }
 
         public override void ShowStatus()
         {
-            string state = IsOn ? $"turned on {Temperature}°C" : "turned off";
+            string state = IsOn ? $"turned on with temperature {Temperature}°C" : "turned off";
             Console.WriteLine($"{Name} is {state}.");
         }
     }
 }
+

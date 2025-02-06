@@ -1,19 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace SmartHouseApp
 {
     public class SmartHouse
     {
-        private List<SmartDevice> devices = new List<SmartDevice>();
+        private List<IControllable> devices = new List<IControllable>();
 
-        public void AddDevice(SmartDevice device)
+        public List<IControllable> Devices => devices;
+
+        public void AddDevice(IControllable device)
         {
             devices.Add(device);
-            Console.WriteLine($"{device.Name} is added in Smart House.");
+            Console.WriteLine($"{device.Name} is added to Smart House.");
         }
 
         public void ShowAllDevices()
         {
-            Console.WriteLine("\n Status of all devices:");
+            Console.WriteLine("\nStatus of all devices:");
             foreach (var device in devices)
             {
                 device.ShowStatus();

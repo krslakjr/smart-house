@@ -6,7 +6,7 @@ namespace SmartHouseApp
     public abstract class SmartDevice : IControllable
     {
         public string Name { get; set; }
-        public bool IsOn { get; private set; }
+        public bool IsOn { get; protected set; }
 
         public SmartDevice(string name)
         {
@@ -25,6 +25,9 @@ namespace SmartHouseApp
             IsOn = false;
             Console.WriteLine($"{Name} is turned off.");
         }
+
+        public abstract void Toggle();
+        public abstract void SetSetting(string setting, int value);
 
         public abstract void ShowStatus();
     }
