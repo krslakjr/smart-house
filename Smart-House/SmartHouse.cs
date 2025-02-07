@@ -17,10 +17,9 @@ namespace SmartHouseApp
 
         public void ShowAllDevices()
         {
-            Console.WriteLine("\nStatus of all devices:");
-            foreach (var device in devices)
+            for (int i = 0; i < Devices.Count; i++)
             {
-                device.ShowStatus();
+                Console.WriteLine($"{i + 1} - {Devices[i].GetStatus()}");
             }
         }
     }

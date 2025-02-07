@@ -29,6 +29,7 @@ namespace SmartHouseApp
         public abstract void Toggle();
         public abstract void SetSetting(string setting, int value);
 
+        public abstract string GetStatus();
         public abstract void ShowStatus();
     }
 }

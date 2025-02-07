@@ -10,105 +10,110 @@ namespace SmartHouseApp
             SmartHouse myHouse = new SmartHouse();
 
             SmartLight light = new SmartLight("Living Room - Lamp", 0); 
-            SmartTV tv = new SmartTV("Samsung TV", 0);
-            SmartAC ac = new SmartAC("LG AC", 16);
+            SmartTV tv = new SmartTV("Samsung TV", 0); 
+            SmartAC ac = new SmartAC("LG Klima", 16); 
 
             myHouse.AddDevice(light);
             myHouse.AddDevice(tv);
             myHouse.AddDevice(ac);
 
             bool running = true;
-            SmartDevice selectedDevice = null; 
 
             while (running)
             {
                 Console.Clear();
-                Console.WriteLine("=== Smart House ===");
-                Console.WriteLine("Select a device to control:");
-
-                
-                Console.WriteLine("1 - Living Room - Lamp (Smart Light)");
-                Console.WriteLine("2 - Samsung TV (Smart TV)");
-                Console.WriteLine("3 - LG AC (Smart AC)");
+                Console.WriteLine("=== Smart House Control ===");
+                Console.WriteLine("1 - Select a device");
+                Console.WriteLine("2 - Show status of all devices");
                 Console.WriteLine("0 - Exit");
+                Console.Write("\nChoose an option: ");
 
-                
-                if (int.TryParse(Console.ReadLine(), out int deviceChoice))
+                if (int.TryParse(Console.ReadLine(), out int mainChoice))
                 {
-                    switch (deviceChoice)
+                    switch (mainChoice)
                     {
-                        case 1:
-                            selectedDevice = light;
-                            break;
-                        case 2:
-                            selectedDevice = tv;
-                            break;
-                        case 3:
-                            selectedDevice = ac;
-                            break;
                         case 0:
                             running = false;
-                            continue;
-                        default:
-                            Console.WriteLine("Invalid choice, please try again.");
-                            continue;
-                    }
+                            break;
 
-                    
-                    while (selectedDevice != null)
-                    {
-                        Console.Clear();
-                        Console.WriteLine($"=== {selectedDevice.Name} Control ===");
-                        Console.WriteLine("1 - Turn On");
-                        Console.WriteLine("2 - Turn Off");
+                        case 1:
+                            Console.Clear();
+                            Console.WriteLine("=== Select a Device ===");
+                            myHouse.ShowAllDevices();
+                            Console.Write("\nSelect a device by number (0 to go back): ");
 
-                        if (selectedDevice is SmartLight)
-                        {
-                            Console.WriteLine("3 - Adjust Brightness (0-100%)");
-                        }
-                        else if (selectedDevice is SmartTV)
-                        {
-                            Console.WriteLine("3 - Adjust Volume (0-100%)");
-                        }
-                        else if (selectedDevice is SmartAC)
-                        {
-                            Console.WriteLine("3 - Adjust Temperature (16-30°C)");
-                        }
-
-                        Console.WriteLine("0 - Back to Main Menu");
-
-                        if (int.TryParse(Console.ReadLine(), out int action))
-                        {
-                            if (action == 0) break;
-
-                            switch (action)
+                            if (int.TryParse(Console.ReadLine(), out int choice) && choice > 0 && choice <= myHouse.Devices.Count)
                             {
-                                case 1:
-                                    selectedDevice.TurnOn();
-                                    break;
-                                case 2:
-                                    selectedDevice.TurnOff();
-                                    break;
-                                case 3:
-                                    Console.Write("Enter value: ");
-                                    if (int.TryParse(Console.ReadLine(), out int value))
-                                    {
-                                        if (selectedDevice is SmartLight lightDevice)
-                                        {
-                                            lightDevice.SetSetting("brightness", value); 
-                                        }
-                                        else if (selectedDevice is SmartTV tvDevice)
-                                        {
-                                            tvDevice.SetSetting("volume", value); 
-                                        }
-                                        else if (selectedDevice is SmartAC acDevice)
-                                        {
-                                            acDevice.SetSetting("temperature", value);  
-                                        }
-                                    }
-                                    break;
+                                IControllable selectedDevice = myHouse.Devices[choice - 1];
+                                ControlDevice(selectedDevice);
                             }
-                        }
+                            break;
+
+                        case 2:
+                            Console.Clear();
+                            Console.WriteLine("=== Status of All Devices ===");
+                            myHouse.ShowAllDevices();
+                            Console.WriteLine("\nPress any key to go back...");
+                            Console.ReadKey();
+                            break;
+                    }
+                }
+            }
+
+            Console.WriteLine("Exiting...");
+        }
+
+        static void ControlDevice(IControllable device)
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine($"=== {device.Name} Control ===");
+                Console.WriteLine("1 - Turn On");
+                Console.WriteLine("2 - Turn Off");
+                Console.WriteLine("3 - Show Status");
+
+                if (device is SmartLight)
+                    Console.WriteLine("4 - Adjust Brightness (0-100%)");
+
+                if (device is SmartTV)
+                    Console.WriteLine("4 - Adjust Volume (0-100%)");
+
+                if (device is SmartAC)
+                    Console.WriteLine("4 - Adjust Temperature (16-30°C)");
+
+                Console.WriteLine("0 - Back to Main Menu");
+                Console.Write("\nChoose an option: ");
+
+                if (int.TryParse(Console.ReadLine(), out int action))
+                {
+                    if (action == 0) break;
+
+                    switch (action)
+                    {
+                        case 1:
+                            device.TurnOn();
+                            break;
+                        case 2:
+                            device.TurnOff();
+                            break;
+                        case 3:
+                            Console.WriteLine("\n" + device.GetStatus());
+                            Console.WriteLine("\nPress any key to continue...");
+                            Console.ReadKey();
+                            break;
+                        case 4:
+                            Console.Write("\nEnter value: ");
+                            if (int.TryParse(Console.ReadLine(), out int value))
+                            {
+                                if (device is SmartLight lightDevice)
+                                    lightDevice.SetBrightness(value);
+                                else if (device is SmartTV tvDevice)
+                                    tvDevice.SetVolume(value);
+                                else if (device is SmartAC acDevice)
+                                    acDevice.SetTemperature(value);
+                            }
+                            break;
                     }
                 }
             }

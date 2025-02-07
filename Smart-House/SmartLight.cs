@@ -40,6 +40,11 @@ namespace SmartHouseApp
             string state = IsOn ? $"turned on with brightness {Brightness}%" : "turned off";
             Console.WriteLine($"{Name} is {state}.");
         }
+        public override string GetStatus()
+        {
+            return $"{Name} is {(IsOn ? "turned on" : "turned off")} with brightness {Brightness}%";
+        }
+
     }
 }
 

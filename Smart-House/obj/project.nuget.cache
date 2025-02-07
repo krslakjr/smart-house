@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "dHlAGxSw5yA=",
+  "dgSpecHash": "T3jQgH4lNQY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\User\\source\\repos\\Smart-House\\Smart-House\\Smart-House.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Lenovo\\source\\repos\\krslakjr\\smart-house\\Smart-House\\Smart-House.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.36\\microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.36\\microsoft.windowsdesktop.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.36\\microsoft.aspnetcore.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.36\\microsoft.netcore.app.host.win-x64.6.0.36.nupkg.sha512"
+  ],
   "logs": []
 }

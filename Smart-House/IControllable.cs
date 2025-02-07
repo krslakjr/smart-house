@@ -10,6 +10,7 @@ namespace SmartHouseApp
         void Toggle();
         void ShowStatus();
         void SetSetting(string setting, int value);
+        string GetStatus();
     }
 }
 
