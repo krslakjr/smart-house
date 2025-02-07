@@ -1,14 +1,51 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace SmartHouseApp
 {
-    public class SmartAC : SmartDevice
+    public class SmartAC : SmartDevice, INotifyPropertyChanged
     {
-        public int Temperature { get; private set; }
+        private int _temperature;
+        private string _buttonContent;
+
+        public string ButtonContent
+        {
+            get => _buttonContent;
+            set
+            {
+                if (_buttonContent != value)
+                {
+                    _buttonContent = value;
+                    OnPropertyChanged(nameof(ButtonContent));
+                }
+            }
+        }
+
+        public int Temperature
+        {
+            get => _temperature;
+            set
+            {
+                if (_temperature != value)
+                {
+                    _temperature = value;
+                    OnPropertyChanged(nameof(Temperature));
+                }
+            }
+        }
+
+        public string Status => IsOn ? $"AC is on with temperature {Temperature}°C" : "AC is off";
+
+        public SmartAC() : base("Smart AC")
+        {
+            _temperature = 22;
+            _buttonContent = "Turn On";
+        }
 
         public SmartAC(string name, int initialTemperature = 22) : base(name)
         {
-            Temperature = initialTemperature;
+            _temperature = initialTemperature;
+            _buttonContent = "Turn On";
         }
 
         public override void SetSetting(string settingName, int value)
@@ -23,15 +60,19 @@ namespace SmartHouseApp
                 Console.WriteLine("Invalid temperature value. It should be between 16°C and 30°C.");
             }
         }
-        public void SetTemperature(int temperature)
+
+        public void SetTemperature(int newTemperature)
         {
-            Temperature = temperature;
-            Console.WriteLine($"{Name} temperature is now {temperature}°C.");
+            if (newTemperature >= 16 && newTemperature <= 30)
+            {
+                Temperature = newTemperature;
+            }
         }
 
         public override void Toggle()
         {
             IsOn = !IsOn;
+            ButtonContent = IsOn ? "Turn Off" : "Turn On";
             Console.WriteLine($"{Name} is {(IsOn ? "turned on" : "turned off")}.");
         }
 
@@ -40,11 +81,17 @@ namespace SmartHouseApp
             string state = IsOn ? $"turned on with temperature {Temperature}°C" : "turned off";
             Console.WriteLine($"{Name} is {state}.");
         }
+
         public override string GetStatus()
         {
             return $"{Name} is {(IsOn ? "turned on" : "turned off")} with temperature {Temperature}°C";
         }
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
-

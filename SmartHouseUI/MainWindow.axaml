@@ -1,0 +1,30 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmartHouseApp;assembly=Smart-House"
+        xmlns:mdi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        mc:Ignorable="d"
+        d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SmartHouseUI.MainWindow"
+        x:DataType="local:SmartAC"
+        Title="Smart House Controller" Width="900" Height="700" Background="#F4B9F2">
+
+	<Window.DataContext>
+		<local:SmartAC x:Name="SmartACDevice" />
+	</Window.DataContext>
+
+	<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+		<TextBlock x:Name="StatusText" Text="{Binding Status}" FontSize="20" HorizontalAlignment="Center" Margin="0,10"/>
+
+		<Button Content="{Binding ButtonContent}" Width="200" Height="40" Margin="0,20"
+                HorizontalAlignment="Center" Click="ToggleACButton_Click"/>
+
+		<Slider x:Name="TemperatureSlider" Minimum="16" Maximum="30" Value="{Binding Temperature}"
+                TickFrequency="1" IsSnapToTickEnabled="True" Width="200" Height="40"
+                HorizontalAlignment="Center" Margin="0,20"
+                ValueChanged="TemperatureSlider_ValueChanged"/>
+
+		<TextBlock Text="Current Temperature" FontSize="16" HorizontalAlignment="Center" Margin="0,10"/>
+	</StackPanel>
+</Window>
