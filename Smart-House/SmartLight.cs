@@ -1,14 +1,44 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace SmartHouseApp
 {
-    public class SmartLight : SmartDevice
+    public class SmartLight : SmartDevice, INotifyPropertyChanged
     {
-        public int Brightness { get; private set; }
+        private int _brightness;
+        private string _buttonContent;
+
+        // Dodajemo ButtonContent svojstvo
+        public string ButtonContent
+        {
+            get => _buttonContent;
+            set
+            {
+                if (_buttonContent != value)
+                {
+                    _buttonContent = value;
+                    OnPropertyChanged(nameof(ButtonContent));
+                }
+            }
+        }
+
+        public int Brightness
+        {
+            get => _brightness;
+            set
+            {
+                if (_brightness != value)
+                {
+                    _brightness = value;
+                    OnPropertyChanged(nameof(Brightness));
+                }
+            }
+        }
 
         public SmartLight(string name, int initialBrightness = 0) : base(name)
         {
             Brightness = initialBrightness;
+            _buttonContent = "Turn On"; // Početni tekst na dugmetu
         }
 
         public override void SetSetting(string settingName, int value)
@@ -23,6 +53,7 @@ namespace SmartHouseApp
                 Console.WriteLine("Invalid brightness value. It should be between 0 and 100.");
             }
         }
+
         public void SetBrightness(int brightness)
         {
             Brightness = brightness;
@@ -32,6 +63,7 @@ namespace SmartHouseApp
         public override void Toggle()
         {
             IsOn = !IsOn;
+            ButtonContent = IsOn ? "Turn Off" : "Turn On"; 
             Console.WriteLine($"{Name} is {(IsOn ? "turned on" : "turned off")}.");
         }
 
@@ -40,11 +72,18 @@ namespace SmartHouseApp
             string state = IsOn ? $"turned on with brightness {Brightness}%" : "turned off";
             Console.WriteLine($"{Name} is {state}.");
         }
+        public string Status => GetStatus();
+
         public override string GetStatus()
         {
             return $"{Name} is {(IsOn ? "turned on" : "turned off")} with brightness {Brightness}%";
         }
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
-

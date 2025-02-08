@@ -35,5 +35,16 @@
                 HorizontalAlignment="Center" Margin="0,20"
                 ValueChanged="VolumeSlider_ValueChanged"/>
 		<TextBlock Text="Current Volume" FontSize="16" HorizontalAlignment="Center" Margin="0,10"/>
+
+		<!-- Smart Lamp -->
+		<TextBlock x:Name="LampStatusText" Text="{Binding SmartLightDevice.Status}" FontSize="20" HorizontalAlignment="Center" Margin="20,10"/>
+		<Button Content="{Binding SmartLightDevice.ButtonContent}"
+        Width="200" Height="40" Margin="0,20"
+        HorizontalAlignment="Center" Click="ToggleLightButton_Click"/>
+		<Slider x:Name="BrightnessSlider" Minimum="0" Maximum="100" Value="{Binding SmartLightDevice.Brightness}"
+                TickFrequency="1" IsSnapToTickEnabled="True" Width="200" Height="40"
+                HorizontalAlignment="Center" Margin="0,20"
+                ValueChanged="BrightnessSlider_ValueChanged"/>
+		<TextBlock Text="Current Brightness" FontSize="16" HorizontalAlignment="Center" Margin="0,10"/>
 	</StackPanel>
 </Window>
