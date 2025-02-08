@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartHouseUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e7823c0a59766a5ad3b7c4d8dfeb7c52efc533a5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b08d2cbea1ebc5730e6b9aa445bcbeea9e410846")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartHouseUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartHouseUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
