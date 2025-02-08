@@ -82,5 +82,17 @@ namespace SmartHouseUI
             UpdateStatus();
         }
 
+        private void ChangeChannelUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as MainViewModel)?.ChangeChannelUp();
+        }
+
+        private void ChangeChannelDownButton_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as MainViewModel)?.ChangeChannelDown(); 
+        }
+
+
+
     }
 }

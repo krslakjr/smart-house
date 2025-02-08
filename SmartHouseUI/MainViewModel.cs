@@ -10,6 +10,9 @@ namespace SmartHouseUI
         public SmartTV SmartTVDevice { get; set; }
         public SmartLight SmartLightDevice { get; set; }
 
+        private int _currentProgram = 1;
+        public string CurrentProgram => $"Program: {_currentProgram}";
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public MainViewModel(SmartAC acDevice, SmartTV tvDevice, SmartLight lightDevice)
@@ -50,7 +53,25 @@ namespace SmartHouseUI
         public string SmartACStatus => SmartACDevice.GetStatus();
         public string SmartTVStatus => SmartTVDevice.GetStatus();
         public string SmartLightStatus => SmartLightDevice.GetStatus();
-        
+
+
+        public void ChangeChannelUp()
+        {
+            SmartTVDevice.ChangeChannelUp();
+            _currentProgram++;
+            OnPropertyChanged(nameof(CurrentProgram));
+        }
+
+        public void ChangeChannelDown()
+        {
+            SmartTVDevice.ChangeChannelDown();
+            if (_currentProgram > 1)
+            {
+                _currentProgram--;
+            }
+            OnPropertyChanged(nameof(CurrentProgram)); 
+        }
+
         public void ToggleACMode()
         {
             SmartACDevice.ToggleMode();

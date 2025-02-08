@@ -49,13 +49,22 @@
 			<TextBlock Text="Smart TV" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10"/>
 			<TextBlock x:Name="TVStatusText" Text="{Binding SmartTVDevice.Status}" FontSize="18" HorizontalAlignment="Center"/>
 			<Button Content="{Binding SmartTVDevice.ButtonContent}" Width="200" Height="40" Margin="0,15"
-                    HorizontalAlignment="Center" Click="ToggleTVButton_Click"/>
+					HorizontalAlignment="Center" Click="ToggleTVButton_Click"/>
 			<Slider x:Name="VolumeSlider" Minimum="0" Maximum="100" Value="{Binding SmartTVDevice.Volume}"
-                    TickFrequency="1" IsSnapToTickEnabled="True" Width="200"
-                    HorizontalAlignment="Center" Margin="0,10"
-                    ValueChanged="VolumeSlider_ValueChanged"/>
+					TickFrequency="1" IsSnapToTickEnabled="True" Width="200"
+					HorizontalAlignment="Center" Margin="0,10"
+					ValueChanged="VolumeSlider_ValueChanged"/>
 			<TextBlock Text="Current Volume" FontSize="16" HorizontalAlignment="Center" Margin="0,5"/>
+			<Button Content="Previous" Width="200" Height="40" Margin="0,15"
+					HorizontalAlignment="Center" Click="ChangeChannelDownButton_Click"/>
+
+			<Button Content="Next" Width="200" Height="40" Margin="0,15"
+					HorizontalAlignment="Center" Click="ChangeChannelUpButton_Click"/>
+
+			<TextBlock Text="{Binding CurrentProgram}" FontSize="16" HorizontalAlignment="Center" Margin="0,10" />
+
 		</StackPanel>
+
 
 		<!-- Separator Line -->
 		<Rectangle Grid.Column="3" Width="2" Fill="White" VerticalAlignment="Stretch" Margin="5"/>

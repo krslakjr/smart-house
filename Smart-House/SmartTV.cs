@@ -7,6 +7,22 @@ namespace SmartHouseApp
     {
         private int _volume;
         private string _buttonContent;
+        private int _currentChannel;
+        private const int MaxChannel = 30;
+
+        public int CurrentChannel
+        {
+            get => _currentChannel;
+            set
+            {
+                if (_currentChannel != value && value >= 1 && value <= MaxChannel)
+                {
+                    _currentChannel = value;
+                    OnPropertyChanged(nameof(CurrentChannel));
+                    OnPropertyChanged(nameof(Status));  
+                }
+            }
+        }
 
         public string ButtonContent
         {
@@ -81,6 +97,30 @@ namespace SmartHouseApp
             IsOn = !IsOn;
             ButtonContent = IsOn ? "Turn Off" : "Turn On";
             Console.WriteLine($"{Name} is now {(IsOn ? "ON" : "OFF")}.");
+        }
+
+        public void ChangeChannelUp()
+        {
+            if (_currentChannel < MaxChannel)
+            {
+                CurrentChannel++;
+            }
+            else
+            {
+                Console.WriteLine("Already on the highest channel.");
+            }
+        }
+
+        public void ChangeChannelDown()
+        {
+            if (_currentChannel > 1)
+            {
+                CurrentChannel--;
+            }
+            else
+            {
+                Console.WriteLine("Already on the lowest channel.");
+            }
         }
 
         public override void ShowStatus()
