@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Smart-House")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+277ca18e897e4852a8e6074d32973f0ef4d7659a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e7823c0a59766a5ad3b7c4d8dfeb7c52efc533a5")]
 [assembly: System.Reflection.AssemblyProductAttribute("Smart-House")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Smart-House")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -31,12 +31,12 @@
 			<TextBlock x:Name="ACStatusText" Text="{Binding SmartACDevice.Status}" FontSize="18" HorizontalAlignment="Center"/>
 			<Button Content="{Binding SmartACDevice.ButtonContent}" Width="200" Height="40" Margin="0,15"
                     HorizontalAlignment="Center" Click="ToggleACButton_Click"/>
+			<TextBlock Text="Current Temperature" FontSize="16" HorizontalAlignment="Center" Margin="0,5"/>
 			<Slider x:Name="TemperatureSlider" Minimum="{Binding SmartACDevice.SliderMinimum}"
                     Maximum="{Binding SmartACDevice.SliderMaximum}" Value="{Binding SmartACDevice.Temperature}"
                     TickFrequency="1" IsSnapToTickEnabled="True" Width="200"
                     HorizontalAlignment="Center" Margin="0,10"
                     ValueChanged="TemperatureSlider_ValueChanged"/>
-			<TextBlock Text="Current Temperature" FontSize="16" HorizontalAlignment="Center" Margin="0,5"/>
 			<Button Content="{Binding SmartACDevice.ModeButtonContent}" Width="200" Height="40" Margin="0,15"
                     HorizontalAlignment="Center" Click="ToggleACModeButton_Click"/>
 		</StackPanel>
@@ -50,19 +50,17 @@
 			<TextBlock x:Name="TVStatusText" Text="{Binding SmartTVDevice.Status}" FontSize="18" HorizontalAlignment="Center"/>
 			<Button Content="{Binding SmartTVDevice.ButtonContent}" Width="200" Height="40" Margin="0,15"
 					HorizontalAlignment="Center" Click="ToggleTVButton_Click"/>
+			<TextBlock Text="Current Volume" FontSize="16" HorizontalAlignment="Center" Margin="0,5"/>
 			<Slider x:Name="VolumeSlider" Minimum="0" Maximum="100" Value="{Binding SmartTVDevice.Volume}"
 					TickFrequency="1" IsSnapToTickEnabled="True" Width="200"
 					HorizontalAlignment="Center" Margin="0,10"
 					ValueChanged="VolumeSlider_ValueChanged"/>
-			<TextBlock Text="Current Volume" FontSize="16" HorizontalAlignment="Center" Margin="0,5"/>
+			
+			<TextBlock Text="{Binding CurrentProgram}" FontSize="16" HorizontalAlignment="Center" Margin="0,10" />
 			<Button Content="Previous" Width="200" Height="40" Margin="0,15"
 					HorizontalAlignment="Center" Click="ChangeChannelDownButton_Click"/>
-
 			<Button Content="Next" Width="200" Height="40" Margin="0,15"
 					HorizontalAlignment="Center" Click="ChangeChannelUpButton_Click"/>
-
-			<TextBlock Text="{Binding CurrentProgram}" FontSize="16" HorizontalAlignment="Center" Margin="0,10" />
-
 		</StackPanel>
 
 
@@ -75,11 +73,16 @@
 			<TextBlock x:Name="LampStatusText" Text="{Binding SmartLightDevice.Status}" FontSize="18" HorizontalAlignment="Center"/>
 			<Button Content="{Binding SmartLightDevice.ButtonContent}" Width="200" Height="40" Margin="0,15"
                     HorizontalAlignment="Center" Click="ToggleLightButton_Click"/>
+			<TextBlock Text="Current Brightness" FontSize="16" HorizontalAlignment="Center" Margin="0,5"/>
 			<Slider x:Name="BrightnessSlider" Minimum="0" Maximum="100" Value="{Binding SmartLightDevice.Brightness}"
                     TickFrequency="1" IsSnapToTickEnabled="True" Width="200"
                     HorizontalAlignment="Center" Margin="0,10"
                     ValueChanged="BrightnessSlider_ValueChanged"/>
-			<TextBlock Text="Current Brightness" FontSize="16" HorizontalAlignment="Center" Margin="0,5"/>
+			<TextBlock Text="Select Color: " FontSize="16" HorizontalAlignment="Center" Margin="0,5"/>
+			<ComboBox x:Name="ColorComboBox" Width="200" Margin="0,15"
+              SelectedItem="{Binding SmartLightDevice.CurrentColor}"
+              ItemsSource="{Binding SmartLightDevice.AvailableColors}"
+              HorizontalAlignment="Center"/>		
 		</StackPanel>
 
 	</Grid>

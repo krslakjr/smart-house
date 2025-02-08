@@ -92,6 +92,14 @@ namespace SmartHouseUI
             (DataContext as MainViewModel)?.ChangeChannelDown(); 
         }
 
+        private void ColorComboBox_SelectionChanged(object sender, Avalonia.Controls.SelectionChangedEventArgs e)
+        {
+            var selectedColor = (string)((ComboBox)sender).SelectedItem;
+            SmartLightDevice.ChangeColor(selectedColor);
+            UpdateStatus();
+        }
+
+
 
 
     }

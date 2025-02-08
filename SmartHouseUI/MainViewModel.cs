@@ -28,6 +28,14 @@ namespace SmartHouseUI
                     OnPropertyChanged(nameof(SmartACStatus)); 
                 }
             };
+
+            SmartLightDevice.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == nameof(SmartLight.CurrentColor))
+                {
+                    OnPropertyChanged(nameof(SmartLightDevice));
+                }
+            };
         }
 
         public MainViewModel()

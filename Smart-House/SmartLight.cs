@@ -7,6 +7,23 @@ namespace SmartHouseApp
     {
         private int _brightness;
         private string _buttonContent;
+        private string _currentColor="Yellow";
+
+        public string[] AvailableColors { get; } = { "Yellow", "Green", "Blue", "Red", "White" };
+
+        public string CurrentColor
+        {
+            get => _currentColor;
+            set
+            {
+                if (_currentColor != value)
+                {
+                    _currentColor = value;
+                    OnPropertyChanged(nameof(CurrentColor));
+                }
+            }
+        }
+
 
         public string ButtonContent
         {
@@ -38,7 +55,9 @@ namespace SmartHouseApp
         {
             Brightness = initialBrightness;
             _buttonContent = "Turn On";
+            _currentColor = AvailableColors[0];
         }
+
 
         public override void SetSetting(string settingName, int value)
         {
@@ -57,6 +76,19 @@ namespace SmartHouseApp
         {
             Brightness = brightness;
             Console.WriteLine($"{Name} brightness is now {brightness}%.");
+        }
+
+        public void ChangeColor(string color)
+        {
+            if (Array.Exists(AvailableColors, c => c.Equals(color, StringComparison.OrdinalIgnoreCase)))
+            {
+                CurrentColor = color;
+                Console.WriteLine($"{Name} color changed to {CurrentColor}.");
+            }
+            else
+            {
+                Console.WriteLine("Invalid color selection.");
+            }
         }
 
         public override void Toggle()
