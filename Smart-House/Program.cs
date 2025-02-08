@@ -9,9 +9,9 @@ namespace SmartHouseApp
         {
             SmartHouse myHouse = new SmartHouse();
 
-            SmartLight light = new SmartLight("Living Room - Lamp", 0); 
-            SmartTV tv = new SmartTV("Samsung TV", 0); 
-            SmartAC ac = new SmartAC("LG Klima", 16); 
+            SmartLight light = new SmartLight("Living Room - Lamp", 0);
+            SmartTV tv = new SmartTV("Samsung TV", 0);
+            SmartAC ac = new SmartAC("LG Klima", 16);
 
             myHouse.AddDevice(light);
             myHouse.AddDevice(tv);
@@ -111,7 +111,7 @@ namespace SmartHouseApp
                                 else if (device is SmartTV tvDevice)
                                     tvDevice.SetVolume(value);
                                 else if (device is SmartAC acDevice)
-                                    acDevice.SetTemperature(value);
+                                    acDevice.SetSetting("temperature", value);  
                             }
                             break;
                     }

@@ -12,21 +12,34 @@ namespace SmartHouseUI
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        // Konstruktor sa parametrima
         public MainViewModel(SmartAC acDevice, SmartTV tvDevice, SmartLight lightDevice)
         {
             SmartACDevice = acDevice;
             SmartTVDevice = tvDevice;
             SmartLightDevice = lightDevice;
+
+            SmartACDevice.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == nameof(SmartAC.Temperature) || e.PropertyName == nameof(SmartAC.IsHeating))
+                {
+                    OnPropertyChanged(nameof(SmartACStatus)); 
+                }
+            };
         }
 
-        // Konstruktor bez parametara koji se koristi za Avalonia
         public MainViewModel()
         {
-            // Podrazumevane vrednosti za inicijalizaciju
             SmartACDevice = new SmartAC("AC", 22);
             SmartTVDevice = new SmartTV("TV", 50);
             SmartLightDevice = new SmartLight("Lamp", 0);
+
+            SmartACDevice.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == nameof(SmartAC.Temperature) || e.PropertyName == nameof(SmartAC.IsHeating))
+                {
+                    OnPropertyChanged(nameof(SmartACStatus));  
+                }
+            };
         }
 
         protected void OnPropertyChanged(string propertyName)
@@ -37,5 +50,11 @@ namespace SmartHouseUI
         public string SmartACStatus => SmartACDevice.GetStatus();
         public string SmartTVStatus => SmartTVDevice.GetStatus();
         public string SmartLightStatus => SmartLightDevice.GetStatus();
+        
+        public void ToggleACMode()
+        {
+            SmartACDevice.ToggleMode();
+            OnPropertyChanged(nameof(SmartACStatus));
+        }
     }
 }

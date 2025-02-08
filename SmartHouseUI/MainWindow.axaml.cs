@@ -72,7 +72,13 @@ namespace SmartHouseUI
         private void BrightnessSlider_ValueChanged(object sender, Avalonia.Controls.Primitives.RangeBaseValueChangedEventArgs e)
         {
             var newBrightness = (int)e.NewValue;
-            SmartLightDevice.SetSetting("temperature", newBrightness);
+            SmartLightDevice.SetSetting("brightness", newBrightness);
+            UpdateStatus();
+        }
+
+        private void ToggleACModeButton_Click(object sender, RoutedEventArgs e)
+        {
+            SmartACDevice.ToggleMode();
             UpdateStatus();
         }
 

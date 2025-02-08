@@ -8,7 +8,6 @@ namespace SmartHouseApp
         private int _brightness;
         private string _buttonContent;
 
-        // Dodajemo ButtonContent svojstvo
         public string ButtonContent
         {
             get => _buttonContent;
@@ -38,7 +37,7 @@ namespace SmartHouseApp
         public SmartLight(string name, int initialBrightness = 0) : base(name)
         {
             Brightness = initialBrightness;
-            _buttonContent = "Turn On"; // Početni tekst na dugmetu
+            _buttonContent = "Turn On";
         }
 
         public override void SetSetting(string settingName, int value)
