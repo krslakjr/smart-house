@@ -1,14 +1,53 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace SmartHouseApp
 {
-    public class SmartTV : SmartDevice
+    public class SmartTV : SmartDevice, INotifyPropertyChanged
     {
-        public int Volume { get; set; }
+        private int _volume;
+        private string _buttonContent;
+
+        public string ButtonContent
+        {
+            get => _buttonContent;
+            set
+            {
+                if (_buttonContent != value)
+                {
+                    _buttonContent = value;
+                    OnPropertyChanged(nameof(ButtonContent));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public int Volume
+        {
+            get => _volume;
+            set
+            {
+                if (_volume != value)
+                {
+                    _volume = value;
+                    OnPropertyChanged(nameof(Volume));
+                    OnPropertyChanged(nameof(Status));
+                }
+            }
+        }
+
+        public string Status => GetStatus();
 
         public SmartTV(string name, int volume = 0) : base(name)
         {
             Volume = volume;
+            _buttonContent = "Turn On";
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public override void SetSetting(string settingName, int value)
@@ -40,6 +79,7 @@ namespace SmartHouseApp
         public override void Toggle()
         {
             IsOn = !IsOn;
+            ButtonContent = IsOn ? "Turn Off" : "Turn On";
             Console.WriteLine($"{Name} is now {(IsOn ? "ON" : "OFF")}.");
         }
 

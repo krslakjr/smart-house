@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Smart-House"
+    "\\Smart-House",
+    "\\SmartHouseUI"
   ],
-  "SelectedNode": "\\Smart-House\\Program.cs",
+  "SelectedNode": "\\SmartHouseUI\\MainWindow.axaml.cs",
   "PreviewInSolutionExplorer": false
 }
