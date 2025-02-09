@@ -131,7 +131,7 @@ namespace SmartHouseApp
 
         public override string GetStatus()
         {
-            return $"{Name} is {(IsOn ? "ON" : "OFF")}, Volume: {Volume}%";
+            return $"{Name} is {(IsOn ? "ON" : "OFF")}, Volume: {Volume}%, Channel: {CurrentChannel}.";
         }
     }
 }

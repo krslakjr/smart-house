@@ -195,7 +195,7 @@ namespace SmartHouseApp
 
         public override string GetStatus()
         {
-            return $"{Name} is {(IsOn ? (_isHeating ? $"heating to {Temperature}°C" : $"cooling to {Temperature}°C") : "turned off")}";
+            return $"{Name} is {(IsOn ? (_isHeating ? $"heating to {Temperature}°C" : $"cooling to {Temperature}°C") : "turned off")}.";
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

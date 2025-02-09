@@ -7,9 +7,9 @@ namespace SmartHouseApp
     {
         private int _brightness;
         private string _buttonContent;
-        private string _currentColor="Yellow";
+        private string _currentColor="yellow";
 
-        public string[] AvailableColors { get; } = { "Yellow", "Green", "Blue", "Red", "White" };
+        public string[] AvailableColors { get; } = { "yellow", "green", "blue", "red", "white" };
 
         public string CurrentColor
         {
@@ -74,9 +74,17 @@ namespace SmartHouseApp
 
         public void SetBrightness(int brightness)
         {
-            Brightness = brightness;
-            Console.WriteLine($"{Name} brightness is now {brightness}%.");
+            if (brightness < 0 || brightness > 100)
+            {
+                Console.WriteLine("Invalid brightness value. It should be between 0 and 100.");
+            }
+            else
+            {
+                Brightness = brightness;
+                Console.WriteLine($"{Name} brightness is now {brightness}%.");
+            }
         }
+
 
         public void ChangeColor(string color)
         {
@@ -107,7 +115,7 @@ namespace SmartHouseApp
 
         public override string GetStatus()
         {
-            return $"{Name} is {(IsOn ? "turned on" : "turned off")} with brightness {Brightness}%";
+            return $"{Name} is {(IsOn ? "on" : "off")} with a brightness of {Brightness}% and color {CurrentColor}.";
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
